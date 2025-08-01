@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  width: 50%;
+}
+
+.answer {
+  margin-right: 25px;
+  font-family: monospace;
+  font-size: 2em;
+}

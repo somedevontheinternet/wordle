@@ -1,6 +1,8 @@
-import type { GuessRow } from "./App";
+import type { GuessRow } from "./Guesses/Guesses";
 import { LetterState } from "./Letter/LetterState";
-import { Words } from "./Words";
+import allWords from "./words.txt?raw";
+
+export const Words = allWords.split("\n").map((w) => w.toUpperCase());
 
 export const process = (guesses: GuessRow[]): string[] => {
   return Words.filter((w): boolean => {
