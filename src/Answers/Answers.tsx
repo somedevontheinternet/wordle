@@ -1,6 +1,6 @@
 import classes from "./Answers.module.css";
 
-const wordDisplayCount = 29;
+const wordDisplayCount = 180;
 
 type AnswersProps = {
   words: string[];
