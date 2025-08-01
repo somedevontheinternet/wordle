@@ -1,0 +1,10 @@
+.letter {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-right: 5px;
+}
