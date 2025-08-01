@@ -4,6 +4,25 @@ import allWords from "./words.txt?raw";
 
 export const Words = allWords.split("\n").map((w) => w.toUpperCase());
 
+const countLetter = (w: string, letter: string): number => {
+  let count = 0;
+  for (let i = 0; i < w.length; i++) {
+    if (w[i] === letter) count++;
+  }
+  return count;
+};
+
+const maxGuessStates: LetterState[] = [LetterState.GREEN, LetterState.YELLOW];
+
+const countMaxGuess = (guess: GuessRow, letter: string): number => {
+  let count = 0;
+  for (let i = 0; i < guess.states.length; i++) {
+    if (maxGuessStates.includes(guess.states[i]) && guess.letters[i] === letter)
+      count++;
+  }
+  return count;
+};
+
 export const process = (guesses: GuessRow[]): string[] => {
   return Words.filter((w): boolean => {
     for (const guess of guesses) {
@@ -11,7 +30,8 @@ export const process = (guesses: GuessRow[]): string[] => {
         const letter = guess.letters[i];
         switch (guess.states[i]) {
           case LetterState.GREY: {
-            if (w.includes(letter)) return false;
+            if (countMaxGuess(guess, letter) < countLetter(w, letter))
+              return false;
             break;
           }
           case LetterState.YELLOW: {
