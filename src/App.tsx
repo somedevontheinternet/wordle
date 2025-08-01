@@ -35,21 +35,21 @@ const handleBackspace = (guesses: GuessRow[]): GuessRow[] => {
   // if we're at the start just do nothing.
   if (guesses.length === 1 && guesses[0].letters.length === 0) return guesses;
 
-  // clear states if partway through a row
+  // remove states if partway through a row
   if (guesses[guesses.length - 1].states.length > 0) {
-    guesses[guesses.length - 1].states = [];
+    guesses[guesses.length - 1].states.splice(-1, 1);
     return [...guesses];
   }
 
-  // then clear letters if partway through a row
+  // then remove letters if partway through a row
   if (guesses[guesses.length - 1].letters.length > 0) {
-    guesses[guesses.length - 1].letters = [];
+    guesses[guesses.length - 1].letters.splice(-1, 1);
     return [...guesses];
   }
 
-  // Otherwise clear states of previous row
+  // Otherwise remove states from previous row
   guesses.splice(-1, 1);
-  guesses[guesses.length - 1].states = [];
+  guesses[guesses.length - 1].states.splice(-1, 1);
   return [...guesses];
 };
 
