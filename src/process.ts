@@ -1,8 +1,15 @@
 import type { GuessRow } from "./Guesses/Guesses";
 import { LetterState } from "./Letter/LetterState";
-import allWords from "./words.txt?raw";
+import allGuesses from "./guesses.txt?raw";
+import originalSolutions from "./solutions.txt?raw";
+import pastSolutions from "./past_answers_2025_08_01.txt?raw";
+import frequency from "./frequency.json";
 
-export const Words = allWords.split("\n").map((w) => w.toUpperCase());
+const Frequency: Record<string, number> = frequency;
+
+export const PastSolutions = pastSolutions.split("\n");
+const ValidGuesses = allGuesses.split("\n");
+export const OriginalSolutions = originalSolutions.split("\n");
 
 const countLetter = (w: string, letter: string): number => {
   let count = 0;
@@ -24,7 +31,7 @@ const countMaxGuess = (guess: GuessRow, letter: string): number => {
 };
 
 export const process = (guesses: GuessRow[]): string[] => {
-  return Words.filter((w): boolean => {
+  return ValidGuesses.filter((w): boolean => {
     for (const guess of guesses) {
       for (let i = 0; i < guess.states.length; i++) {
         const letter = guess.letters[i];
@@ -48,5 +55,5 @@ export const process = (guesses: GuessRow[]): string[] => {
     }
 
     return true;
-  });
+  }).sort((a, b): number => (Frequency[b] ?? 0) - (Frequency[a] ?? 0));
 };

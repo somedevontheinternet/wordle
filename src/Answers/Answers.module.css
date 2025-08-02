@@ -10,3 +10,11 @@
   font-family: monospace;
   font-size: 2em;
 }
+
+.originalSolution {
+  color: red;
+}
+
+.pastSolution {
+  color: #00000033;
+}

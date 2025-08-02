@@ -1,3 +1,4 @@
+import { OriginalSolutions, PastSolutions } from "../process";
 import classes from "./Answers.module.css";
 
 const wordDisplayCount = 180;
@@ -10,11 +11,18 @@ export const Answers = ({ words }: AnswersProps): React.ReactElement => {
   return (
     <>
       <div className={classes.container}>
-        {words.slice(0, wordDisplayCount).map((w) => (
-          <span key={w} className={classes.answer}>
-            {w}
-          </span>
-        ))}
+        {words.slice(0, wordDisplayCount).map((w) => {
+          const extraClass = PastSolutions.includes(w)
+            ? " " + classes.pastSolution
+            : OriginalSolutions.includes(w)
+            ? " " + classes.originalSolution
+            : "";
+          return (
+            <span key={w} className={classes.answer + extraClass}>
+              {w}
+            </span>
+          );
+        })}
         <br />
       </div>
       <Extra wordCount={words.length} />
